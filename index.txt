@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Job Opportunities - Professional Landing Page</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+
+    <style>
+
+        /* General Styles */
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body { font-family: 'Poppins', sans-serif; background: linear-gradient(135deg, #f5f7fa 0%, #e4edf9 100%); color: #333; line-height: 1.6; overflow-x: hidden; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+        
+
+        /* Header Styles */
+
+        header { background: rgba(255, 255, 255, 0.95); box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1); position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; backdrop-filter: blur(10px); }
+
+        .header-container { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; }
+
+        .logo { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 32px; color: #2563eb; text-decoration: none; display: flex; align-items: center; }
+
+        .logo i { margin-right: 10px; color: #3b82f6; animation: pulse 2s infinite; }
+
+        .nav-links { display: flex; list-style: none; align-items: center; }
+
+        .nav-links li { margin-left: 30px; }
+
+        .nav-links a { text-decoration: none; color: #4b5563; font-weight: 500; transition: all 0.3s ease; position: relative; display: flex; align-items: center; cursor: pointer; padding: 5px 0; }
+
+        .nav-links a:hover, .nav-links a.active-filter { color: #2563eb; }
+
+        .nav-links a::after { content: ''; position: absolute; width: 0; height: 2px; bottom: -5px; left: 0; background-color: #2563eb; transition: width 0.3s ease; }
+
+        .nav-links a:hover::after, .nav-links a.active-filter::after { width: 100%; }
+
+        
+
+        /* Dropdown menu */
+
+        .dropdown { position: relative; }
+
+        .dropdown-content { position: absolute; top: calc(100% + 15px); left: 50%; transform: translateX(-50%); background: white; min-width: 220px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-radius: 10px; z-index: 100; opacity: 0; transform: translateY(10px) translateX(-50%); visibility: hidden; transition: all 0.3s ease; max-height: 400px; overflow-y: auto; border: 1px solid #f1f5f9; }
+
+        .dropdown:hover .dropdown-content { opacity: 1; transform: translateY(0) translateX(-50%); visibility: visible; }
+
+        .dropdown-content::before { content: ''; position: absolute; top: -10px; left: 50%; transform: translateX(-50%); border-width: 0 8px 8px 8px; border-style: solid; border-color: transparent transparent white transparent; }
+
+        .dropdown-content a { padding: 12px 20px; display: block; color: #4b5563; transition: all 0.2s ease; border-bottom: 1px solid #f1f5f9; white-space: nowrap; }
+
+        .dropdown-content a:last-child { border-bottom: none; }
+
+        .dropdown-content a:hover, .dropdown-content a.active-filter { background: #f1f5f9; color: #2563eb; padding-left: 25px; }
+
+        .dropdown-content a i { margin-right: 10px; width: 20px; text-align: center; }
+
+        .nav-links .dropdown > a.active-filter { color: #2563eb; }
+
+        .nav-links .dropdown > a.active-filter::after { width: 0; }
+
+        
+
+        /* Hero Section */
+
+        .hero { padding: 180px 0 100px; text-align: center; position: relative; overflow: hidden; }
+
+        .hero::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(120deg, rgba(37, 99, 235, 0.1) 0%, rgba(59, 130, 246, 0.05) 100%); z-index: -1; }
+
+        .hero-content { max-width: 800px; margin: 0 auto; }
+
+        .hero h1 { font-family: 'Montserrat', sans-serif; font-size: 3.5rem; margin-bottom: 20px; color: #1e293b; animation: fadeInDown 1s ease; }
+
+        .hero p { font-size: 1.25rem; color: #475569; margin-bottom: 30px; animation: fadeInUp 1s ease 0.2s forwards; opacity: 0; }
+
+        .hero-image-container { position: relative; width: 100%; max-width: 800px; height: 300px; margin: 50px auto 0; border-radius: 15px; overflow: hidden; box-shadow: 0 20px 30px rgba(0, 0, 0, 0.1); animation: float 6s ease-in-out infinite; }
+
+        .hero-gif { width: 100%; height: 100%; background: linear-gradient(45deg, #3b82f6, #60a5fa, #93c5fd); display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; font-weight: 600; overflow: hidden; }
+
+        .hero-gif-content { position: relative; z-index: 2; text-align: center; padding: 20px; }
+
+        .gif-animation { position: absolute; width: 100%; height: 100%; top: 0; left: 0; display: flex; justify-content: space-around; align-items: center; opacity: 0.7; }
+
+        .gif-item { animation: floatItem 8s infinite ease-in-out; font-size: 40px; opacity: 0.8; }
+
+        .stats { display: flex; justify-content: center; gap: 40px; margin-top: 60px; animation: fadeIn 1s ease 0.4s forwards; opacity: 0; }
+
+        .stat-item { text-align: center; }
+
+        .stat-number { font-size: 2.5rem; font-weight: 700; color: #2563eb; margin-bottom: 10px; }
+
+        .stat-label { font-size: 1rem; color: #64748b; font-weight: 500; }
+
+        
+
+        /* Job Listings */
+
+        .section-title { text-align: center; margin: 80px 0 50px; position: relative; }
+
+        .section-title h2 { font-family: 'Montserrat', sans-serif; font-size: 2.5rem; color: #1e293b; display: inline-block; position: relative; }
+
+        .section-title h2::after { content: ''; position: absolute; bottom: -15px; left: 50%; transform: translateX(-50%); width: 80px; height: 4px; background: #2563eb; border-radius: 2px; }
+
+        .jobs-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 30px; margin-bottom: 80px; }
+
+        #no-results-message { display: none; text-align: center; padding: 50px 20px; background-color: #fff; border-radius: 15px; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05); margin: 20px 0; color: #64748b; font-size: 1.2rem; }
+
+        #no-results-message i { font-size: 3rem; color: #9ca3af; display: block; margin-bottom: 20px; }
+
+        .job-card { background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05); transition: all 0.4s ease; position: relative; transform: translateY(20px); opacity: 0; }
+
+        .job-card.animate { transform: translateY(0); opacity: 1; }
+
+        .job-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1); }
+
+        .job-image { height: 160px; background-size: cover; background-position: center; position: relative; }
+
+        .job-image img { width: 100%; height: 100%; object-fit: cover; transition: all 0.5s ease; }
+
+        .job-card:hover .job-image img { transform: scale(1.05); }
+
+        .job-badge { position: absolute; top: 15px; right: 15px; background: #10b981; color: white; padding: 5px 15px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; animation: pulse 1.5s infinite; }
+
+        .job-content { padding: 25px; }
+
+        .job-title { font-size: 1.4rem; font-weight: 600; margin-bottom: 10px; color: #1e293b; }
+
+        .job-type { display: inline-block; background: #dbeafe; color: #2563eb; padding: 4px 12px; border-radius: 20px; font-size: 0.85rem; margin-bottom: 15px; }
+
+        .job-description { color: #64748b; margin-bottom: 20px; font-size: 0.95rem; }
+
+        .apply-btn { display: block; width: 100%; padding: 12px; background: #2563eb; color: white; text-align: center; text-decoration: none; border-radius: 8px; font-weight: 600; transition: all 0.3s ease; position: relative; overflow: hidden; }
+
+        .apply-btn:hover { background: #1d4ed8; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3); }
+
+        .apply-btn::after { content: ''; position: absolute; top: -50%; left: -60%; width: 20px; height: 200%; background: rgba(255, 255, 255, 0.3); transform: rotate(25deg); transition: all 0.5s; }
+
+        .apply-btn:hover::after { left: 120%; }
+
+        
+
+        /* Features Section */
+
+        .features { background: white; padding: 80px 0; border-radius: 30px 30px 0 0; margin-top: 50px; }
+
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+
+        .feature-card { background: #f8fafc; padding: 30px; border-radius: 15px; text-align: center; transition: all 0.3s ease; border: 1px solid #e2e8f0; }
+
+        .feature-card:hover { transform: translateY(-10px); box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05); border-color: #dbeafe; }
+
+        .feature-icon { width: 80px; height: 80px; background: #dbeafe; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; color: #2563eb; font-size: 30px; transition: all 0.3s ease; }
+
+        .feature-card:hover .feature-icon { background: #2563eb; color: white; transform: scale(1.1); }
+
+        .feature-title { font-size: 1.3rem; margin-bottom: 15px; color: #1e293b; }
+
+        .feature-text { color: #64748b; font-size: 0.95rem; }
+
+        
+
+        /* Testimonials Section */
+
+        .testimonials { padding: 80px 0; background: #f1f5f9; }
+
+        .testimonials-container { position: relative; max-width: 800px; margin: 0 auto; overflow: hidden; }
+
+        .testimonial-slider { display: flex; transition: transform 0.5s ease; }
+
+        .testimonial { min-width: 100%; padding: 30px; background: white; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); text-align: center; }
+
+        .testimonial-img { width: 80px; height: 80px; border-radius: 50%; margin: 0 auto 20px; overflow: hidden; border: 3px solid #dbeafe; }
+
+        .testimonial-img img { width: 100%; height: 100%; object-fit: cover; }
+
+        .testimonial-text { font-size: 1.1rem; color: #475569; margin-bottom: 20px; font-style: italic; }
+
+        .testimonial-name { font-weight: 600; color: #1e293b; }
+
+        .testimonial-position { color: #64748b; font-size: 0.9rem; }
+
+        .slider-controls { display: flex; justify-content: center; gap: 15px; margin-top: 30px; }
+
+        .slider-btn { width: 40px; height: 40px; border-radius: 50%; background: #2563eb; color: white; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s ease; border: none; }
+
+        .slider-btn:hover { background: #1d4ed8; transform: scale(1.1); }
+
+        
+
+        /* Footer */
+
+        footer { background: #1e293b; color: #cbd5e1; padding: 60px 0 30px; margin-top: 80px; }
+
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; margin-bottom: 40px; }
+
+        .footer-column h3 { color: white; font-size: 1.3rem; margin-bottom: 20px; position: relative; padding-bottom: 10px; }
+
+        .footer-column h3::after { content: ''; position: absolute; bottom: 0; left: 0; width: 40px; height: 3px; background: #2563eb; }
+
+        .footer-links { list-style: none; }
+
+        .footer-links li { margin-bottom: 12px; }
+
+        .footer-links a, .footer-contact-link { color: #94a3b8; text-decoration: none; transition: all 0.3s ease; display: inline-block; cursor: pointer; }
+
+        .footer-links a:hover, .footer-contact-link:hover { color: #60a5fa; padding-left: 5px; }
+
+        .social-links { display: flex; gap: 15px; margin-top: 20px; }
+
+        .social-links a { display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; background: #334155; border-radius: 50%; color: white; text-decoration: none; transition: all 0.3s ease; }
+
+        .social-links a:hover { background: #2563eb; transform: translateY(-3px); }
+
+        .copyright { text-align: center; padding-top: 30px; border-top: 1px solid #334155; font-size: 0.9rem; color: #94a3b8; }
+
+        .copyright a { color: #60a5fa; text-decoration: none; }
+
+        .copyright a:hover { text-decoration: underline; }
+
+        
+
+        /* Animations & Responsive */
+
+        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
+
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
+
+        @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-15px); } 100% { transform: translateY(0px); } }
+
+        @keyframes floatItem { 0% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-20px) rotate(10deg); } 100% { transform: translateY(0) rotate(0deg); } }
+
+        
+
+        @media (max-width: 992px) { .hero h1 { font-size: 2.8rem; } }
+
+        @media (max-width: 768px) {
+
+            .header-container { flex-direction: column; padding: 15px 0; }
+
+            .nav-links { margin-top: 15px; flex-wrap: wrap; justify-content: center; }
+
+            .nav-links li { margin: 5px 10px; }
+
+            .dropdown-content { left: 50%; transform: translateX(-50%); }
+
+            .hero { padding: 150px 0 80px; }
+
+            .hero h1 { font-size: 2.2rem; }
+
+            .hero p { font-size: 1.1rem; }
+
+            .stats { flex-wrap: wrap; }
+
+            .section-title h2 { font-size: 2rem; }
+
+        }
+
+        @media (max-width: 576px) {
+
+            .hero h1 { font-size: 1.8rem; }
+
+            .hero-image-container { height: 200px; }
+
+            .logo { font-size: 24px; }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <header>
+
+        <div class="container header-container">
+
+            <a href="#" class="logo"><i class="fas fa-briefcase"></i> JOB OPPORTUNITIES</a>
+
+            <ul class="nav-links">
+
+                <li><a href="#" class="nav-filter active-filter" data-category="all">Home</a></li>
+
+                <li class="dropdown">
+
+                    <a role="button">Categories <i class="fas fa-chevron-down"></i></a>
+
+                    <div class="dropdown-content">
+
+                        <a href="#" class="nav-filter" data-category="Kelly Services"><i class="fas fa-briefcase"></i> Kelly Services</a>
+
+                        <a href="#" class="nav-filter" data-category="Housekeeping"><i class="fas fa-broom"></i> Housekeeping</a>
+
+                        <a href="#" class="nav-filter" data-category="Dollar Tree"><i class="fas fa-dollar-sign"></i> Dollar Tree</a>
+
+                        <a href="#" class="nav-filter" data-category="Amazon From Home"><i class="fas fa-house-laptop"></i> Amazon From Home</a>
+
+                        <a href="#" class="nav-filter" data-category="Work From Home"><i class="fas fa-house-user"></i> Work From Home</a>
+
+                        <a href="#" class="nav-filter" data-category="FedEx"><i class="fas fa-shipping-fast"></i> FedEx</a>
+
+                        <a href="#" class="nav-filter" data-category="Waste Management"><i class="fas fa-trash"></i> Waste Management</a>
+
+                        <a href="#" class="nav-filter" data-category="Nurse"><i class="fas fa-user-nurse"></i> Nurse</a>
+
+                        <a href="#" class="nav-filter" data-category="Aldi"><i class="fas fa-shopping-cart"></i> Aldi</a>
+
+                        <a href="#" class="nav-filter" data-category="USPS"><i class="fas fa-truck"></i> USPS</a>
+
+                        <a href="#" class="nav-filter" data-category="Remote"><i class="fas fa-laptop-house"></i> Remote</a>
+
+                        <a href="#" class="nav-filter" data-category="Amazon"><i class="fab fa-amazon"></i> Amazon</a>
+
+                        <a href="#" class="nav-filter" data-category="Facebook"><i class="fab fa-facebook"></i> Facebook</a>
+
+                        <a href="#" class="nav-filter" data-category="Shein"><i class="fas fa-tshirt"></i> Shein</a>
+
+                        <a href="#" class="nav-filter" data-category="Empleo"><i class="fas fa-globe"></i> Empleo</a>
+
+                        <a href="#" class="nav-filter" data-category="Driver"><i class="fas fa-car"></i> Driver</a>
+
+                    </div>
+
+                </li>
+
+                <li><a href="#testimonials">Testimonial</a></li>
+
+                <li><a href="#footer-contact">Contact</a></li>
+
+            </ul>
+
+        </div>
+
+    </header>
+
+
+    <main>
+
+        <section class="hero">
+
+            <div class="container hero-content"><h1>Discover Your Next Career Opportunity</h1><p>Explore a wide range of positions from top companies and find the perfect role that matches your skills and aspirations.</p><div class="hero-image-container"><div class="hero-gif"><div class="gif-animation"><div class="gif-item" style="animation-delay: 0s;"><i class="fas fa-search"></i></div><div class="gif-item" style="animation-delay: 0.5s;"><i class="fas fa-user-tie"></i></div><div class="gif-item" style="animation-delay: 1s;"><i class="fas fa-laptop"></i></div><div class="gif-item" style="animation-delay: 1.5s;"><i class="fas fa-chart-line"></i></div></div><div class="hero-gif-content"><h3>Explore Exciting Career Paths</h3><p style="color: rgba(255,255,255,0.9);">Find opportunities that match your skills</p></div></div></div><div class="stats"><div class="stat-item"><div class="stat-number">2000+</div><div class="stat-label">Job Opportunities</div></div><div class="stat-item"><div class="stat-number">500+</div><div class="stat-label">Companies</div></div><div class="stat-item"><div class="stat-number">98%</div><div class="stat-label">Satisfaction Rate</div></div></div></div>
+
+        </section>
+
+
+        <section class="container" id="job-section">
+
+            <div class="section-title"><h2 id="job-section-title">Featured Opportunities</h2></div>
+
+            <div class="jobs-grid" id="jobsGrid"></div>
+
+            <div id="no-results-message"><i class="fas fa-search-minus"></i><p>Sorry, no jobs were found in this category.</p><p>Please try another category or check back later.</p></div>
+
+        </section>
+
+
+        <section class="features">
+
+            <div class="container"><div class="section-title"><h2>Why Choose Us</h2></div><div class="features-grid"><div class="feature-card"><div class="feature-icon"><i class="fas fa-search"></i></div><h3 class="feature-title">Wide Selection</h3><p class="feature-text">Access thousands of job opportunities across various industries and locations.</p></div><div class="feature-card"><div class="feature-icon"><i class="fas fa-shield-alt"></i></div><h3 class="feature-title">Verified Listings</h3><p class="feature-text">All opportunities are thoroughly vetted to ensure legitimacy and quality.</p></div><div class="feature-card"><div class="feature-icon"><i class="fas fa-bolt"></i></div><h3 class="feature-title">Quick Application</h3><p class="feature-text">Simple and fast application process to get you in front of employers quickly.</p></div></div></div>
+
+        </section>
+
+
+        <section id="testimonials" class="testimonials">
+
+            <div class="container">
+
+                <div class="section-title"><h2>What Our Users Say</h2></div>
+
+                <div class="testimonials-container">
+
+                    <div class="testimonial-slider" id="testimonialSlider"></div>
+
+                    <div class="slider-controls"><button class="slider-btn" id="prevTestimonial" aria-label="Previous Testimonial"><i class="fas fa-chevron-left"></i></button><button class="slider-btn" id="nextTestimonial" aria-label="Next Testimonial"><i class="fas fa-chevron-right"></i></button></div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer id="footer-contact">
+
+        <div class="container">
+
+            <div class="footer-grid">
+
+                <div class="footer-column">
+
+                    <h3>Job Opportunities</h3>
+
+                    <p>Connecting talented professionals with the best companies. Our mission is to make job searching efficient and effective.</p>
+
+                    <div class="social-links">
+
+                        <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+
+                        <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+
+                        <a href="#" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+
+                    </div>
+
+                </div>
+
+                <div class="footer-column">
+
+                    <h3>Quick Links</h3>
+
+                    <ul class="footer-links">
+
+                        <li><a href="#" class="nav-filter" data-category="all">Home</a></li>
+
+                        <li><a href="#job-section">Browse Jobs</a></li>
+
+                        <li><a href="#testimonials">Testimonials</a></li>
+
+                        <li><a href="#footer-contact">Contact Us</a></li>
+
+                    </ul>
+
+                </div>
+
+                <div class="footer-column">
+
+                    <h3>Job Categories</h3>
+
+                    <ul class="footer-links">
+
+                        <li><a href="#" class="nav-filter" data-category="Housekeeping"><i class="fas fa-broom"></i> Housekeeping</a></li>
+
+                        <li><a href="#" class="nav-filter" data-category="Amazon"><i class="fab fa-amazon"></i> Amazon</a></li>
+
+                        <li><a href="#" class="nav-filter" data-category="Work From Home"><i class="fas fa-house-user"></i> Work From Home</a></li>
+
+                        <li><a href="#" class="nav-filter" data-category="Remote"><i class="fas fa-laptop-house"></i> Remote</a></li>
+
+                    </ul>
+
+                </div>
+
+                <div class="footer-column">
+
+                    <h3>Contact Us</h3>
+
+                    <ul class="footer-links">
+
+                        <li><i class="fas fa-envelope"></i> <a href="mailto:info@jobopps.com" class="footer-contact-link">info@jobopps.com</a></li>
+
+                        <li><i class="fas fa-phone"></i> <a href="tel:+18001234567" class="footer-contact-link">+1 (800) 123-4567</a></li>
+
+                        <li><i class="fas fa-map-marker-alt"></i> New York, NY 10001, USA</li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+            <div class="copyright">© 2024 Job Opportunities. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></div>
+
+        </div>
+
+    </footer>
+
+
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function() {
+
+            // --- DATA ---
+
+            const jobListings = [
+
+                { title: "Kelly Services", type: "Contract", image: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=400&q=80", link: "https://nx2bs.com/c?o=320&a=20329&s1=Job320", category: "Kelly Services" },
+
+                { title: "Housekeeping", type: "Full-time", image: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=400&q=80", link: "https://nx2bs.com/c?o=333&a=20329&s1=Job333", category: "Housekeeping" },
+
+                { title: "Dollar Tree", type: "Part-time", image: "https://i.postimg.cc/63y4mQ2c/20250704-2242-Friendly-Dollar-Tree-Employee-simple-compose-01jzb51txyeg1aqc1nr4shzqqq.png", link: "https://nx2bs.com/c?o=354&a=20329&s1=Job354", category: "Dollar Tree" },
+
+                { title: "Amazon From Home", type: "Remote", image: "https://i.postimg.cc/FHpfFS0G/20250704-2243-Cozy-Home-Office-simple-compose-01jzb539xcfkyb38f9rew4v96m.png", link: "https://nx2bs.com/c?o=356&a=20329&s1=Job356", category: "Amazon From Home" },
+
+                { title: "Work From Home", type: "Remote", image: "https://images.unsplash.com/photo-1547658719-da2b51169166?auto=format&fit=crop&w=400&q=80", link: "https://nx2bs.com/c?o=357&a=20329&s1=Job357", category: "Work From Home" },
+
+                { title: "FedEx", type: "Full-time", image: "https://i.postimg.cc/fWS07JhT/20250704-2245-Smiling-Fed-Ex-Driver-simple-compose-01jzb54g66f76sma8yn48seyq9.png", link: "https://nx2bs.com/c?o=358&a=20329&s1=Job358", category: "FedEx" },
+
+                { title: "Waste Management", type: "Full-time", image: "https://i.postimg.cc/PqzknbZr/20250705-0000-Innovative-Waste-Solutions-simple-compose-01jzb9dyfme71v4w1r6wzcmhxr.png", link: "https://nx2bs.com/c?o=362&a=20329&s1=Job362", category: "Waste Management" },
+
+                { title: "Nurse", type: "Full-time", image: "https://i.postimg.cc/rpYKxLnr/20250704-2257-Compassionate-Nurse-at-Work-simple-compose-01jzb5twspet28cvfsb52xqw8v.png", link: "https://nx2bs.com/c?o=363&a=20329&s1=Job363", category: "Nurse" },
+
+                { title: "Aldi", type: "Full-time", image: "https://i.postimg.cc/26MLRfnD/20250704-2326-Joyful-Aldi-Worker-simple-compose-01jzb7k6axeycs94647672sfsw.png", link: "https://nx2bs.com/c?o=366&a=20329&s1=Job366", category: "Aldi" },
+
+                { title: "USPS", type: "Full-time", image: "https://i.postimg.cc/Qt9Vqnwn/20250704-2331-Friendly-Mail-Carrier-simple-compose-01jzb7v5a8fxmvn3vjr7t2n2ts.png", link: "https://nx2bs.com/c?o=367&a=20329&s1=Job367", category: "USPS" },
+
+                { title: "Remote Job", type: "Remote", image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=400&q=80", link: "https://nx2bs.com/c?o=369&a=20329&s1=Job369", category: "Remote" },
+
+                { title: "Amazon", type: "Full-time", image: "https://i.postimg.cc/Xq5GnDgy/20250704-2331-Innovative-Team-Collaboration-simple-compose-01jzb7wff7e3tsbct2rpr3pdrp.png", link: "https://nx2bs.com/c?o=370&a=20329&s1=Job370", category: "Amazon" },
+
+                { title: "Facebook", type: "Full-time", image: "https://i.postimg.cc/gJzbzwqy/20250705-0001-Facebook-Job-Offer-simple-compose-01jzb9h84ge8xtwkrtgaxaetqd.png", link: "https://nx2bs.com/c?o=371&a=20329&s1=Job371", category: "Facebook" },
+
+                { title: "Work From Home", type: "Remote", image: "https://images.unsplash.com/photo-1547658719-da2b51169166?auto=format&fit=crop&w=400&q=80", link: "https://nx2bs.com/c?o=375&a=20329&s1=Job375", category: "Work From Home" },
+
+                { title: "Kelly Services", type: "Contract", image: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=400&q=80", link: "https://nx2bs.com/c?o=376&a=20329&s1=Job376", category: "Kelly Services" },
+
+                { title: "Shein", type: "Full-time", image: "https://i.postimg.cc/63kqbfN6/20250704-2333-Chic-Shopping-Spree-simple-compose-01jzb7yg84fmtasshth16en7zh.png", link: "https://nx2bs.com/c?o=350&a=20329&s1=Job350", category: "Shein" },
+
+                { title: "Empleo (General Labor)", type: "Contract", image: "https://i.postimg.cc/9FGRSKM6/20250704-2334-Confident-Worker-Portrait-simple-compose-01jzb81wwqewta5990avbpm682.png", link: "https://nx2bs.com/c?o=345&a=20329&s1=Job345", category: "Empleo" },
+
+                { title: "UPS Remote Job", type: "Remote", image: "https://images.unsplash.com/photo-1566576721346-d4a3b4eaeb55?auto=format&fit=crop&w=400&q=80", link: "https://nx2bs.com/c?o=315&a=20329&s1=Job315", category: "Remote" },
+
+                { title: "Amazon Warehouse", type: "Full-time", image: "https://i.postimg.cc/C5b13nFG/20250704-2336-Efficient-Amazon-Warehouse-Worker-simple-compose-01jzb82zkhevwaqftxgryhrsa7.png", link: "https://nx2bs.com/c?o=315&a=20329&s1=Job315", category: "Amazon" },
+
+                { title: "Dish Washer Remote Job", type: "Remote", image: "https://i.postimg.cc/5ttXXt3J/20250704-2339-Hybrid-Work-Environments-simple-compose-01jzb88y2afbnb0rn0mc3swx67.png", link: "https://nx2bs.com/c?o=262&a=20329&s1=Job262", category: "Housekeeping" },
+
+                { title: "Housekeeping Remote Job", type: "Remote", image: "https://i.postimg.cc/tR6YZwhs/20250704-2341-Remote-Booking-Management-simple-compose-01jzb8ckmhe13s58fs2qy35bwn.png", link: "https://nx2bs.com/c?o=264&a=20329&s1=Job264", category: "Housekeeping" },
+
+                { title: "Driver", type: "Full-time", image: "https://i.postimg.cc/x1nJS5Nc/20250704-2342-Welcoming-Driver-View-simple-compose-01jzb8ftgdebhvwgzrr9mc9qre.png", link: "https://nx2bs.com/c?o=355&a=20329&s1=Job355", category: "Driver" }
+
+            ];
+
+            const testimonials = [
+
+                { name: "Sarah Johnson", position: "Marketing Manager", text: "I found my dream job through this platform. Easy to use and the support team is amazing!", image: "https://randomuser.me/api/portraits/women/32.jpg" },
+
+                { name: "Michael Chen", position: "Software Developer", text: "After months of searching, I landed a great remote position. The job listings are high quality.", image: "https://randomuser.me/api/portraits/men/54.jpg" },
+
+                { name: "Emily Rodriguez", position: "HR Specialist", text: "As a recruiter, I've found excellent candidates through this platform. It's become my go-to resource.", image: "https://randomuser.me/api/portraits/women/65.jpg" },
+
+                { name: "David Kim", position: "Product Designer", text: "The application process was seamless. I received interview requests within days of applying. Highly recommend!", image: "https://randomuser.me/api/portraits/men/22.jpg" }
+
+            ];
+
+
+            // --- DOM ELEMENTS ---
+
+            const jobsGrid = document.getElementById('jobsGrid');
+
+            const noResultsMessage = document.getElementById('no-results-message');
+
+            const jobSectionTitle = document.getElementById('job-section-title');
+
+            const testimonialSlider = document.getElementById('testimonialSlider');
+
+            const prevBtn = document.getElementById('prevTestimonial');
+
+            const nextBtn = document.getElementById('nextTestimonial');
+
+            
+
+            // --- JOB CARD GENERATION ---
+
+            function generateJobCards(filterCategory = 'all') {
+
+                jobsGrid.innerHTML = ''; 
+
+                const filteredJobs = filterCategory === 'all' 
+
+                    ? jobListings 
+
+                    : jobListings.filter(job => job.category === filterCategory);
+
+
+                if (filteredJobs.length === 0) {
+
+                    jobsGrid.style.display = 'none';
+
+                    noResultsMessage.style.display = 'block';
+
+                } else {
+
+                    jobsGrid.style.display = 'grid';
+
+                    noResultsMessage.style.display = 'none';
+
+                    
+
+                    filteredJobs.forEach((job, index) => {
+
+                        const jobCard = document.createElement('div');
+
+                        jobCard.className = 'job-card';
+
+                        jobCard.innerHTML = `
+
+                            <div class="job-image">
+
+                                <img src="${job.image}" alt="${job.title}" loading="lazy">
+
+                                <div class="job-badge">New</div>
+
+                            </div>
+
+                            <div class="job-content">
+
+                                <h3 class="job-title">${job.title}</h3>
+
+                                <span class="job-type">${job.type}</span>
+
+                                <p class="job-description">Explore opportunities in this field with competitive compensation.</p>
+
+                                <a href="${job.link}" target="_blank" rel="noopener noreferrer" class="apply-btn">Apply Now <i class="fas fa-arrow-right"></i></a>
+
+                            </div>`;
+
+                        jobsGrid.appendChild(jobCard);
+
+                        setTimeout(() => { jobCard.classList.add('animate'); }, 100 * (index % 10));
+
+                    });
+
+                }
+
+            }
+
+
+            // --- FILTERING LOGIC ---
+
+            const allFilterLinks = document.querySelectorAll('.nav-filter');
+
+            
+
+            function updateActiveFilter(category) {
+
+                // Remove active class from all filter links
+
+                allFilterLinks.forEach(link => link.classList.remove('active-filter'));
+
+                
+
+                // Add active class to the selected category links
+
+                document.querySelectorAll(`.nav-filter[data-category="${category}"]`).forEach(el => el.classList.add('active-filter'));
+
+                
+
+                // Handle special case for dropdown parent
+
+                const dropdownParent = document.querySelector('.dropdown > a');
+
+                if (category !== 'all' && document.querySelector(`.dropdown .nav-filter[data-category="${category}"]`)) {
+
+                    dropdownParent.classList.add('active-filter');
+
+                } else {
+
+                    dropdownParent.classList.remove('active-filter');
+
+                }
+
+            }
+
+
+            allFilterLinks.forEach(link => {
+
+                link.addEventListener('click', function(e) {
+
+                    // This is the key fix for footer links
+
+                    e.preventDefault(); 
+
+                    
+
+                    const category = this.dataset.category;
+
+                    
+
+                    updateActiveFilter(category);
+
+                    
+
+                    jobSectionTitle.textContent = category === 'all' ? 'Featured Opportunities' : `Opportunities in ${category}`;
+
+                    generateJobCards(category);
+
+                    
+
+                    // Scroll to job section only if the link is in the header
+
+                    const isHeaderLink = this.closest('header');
+
+                    if(isHeaderLink) { 
+
+                         document.getElementById('job-section').scrollIntoView({ behavior: 'smooth' });
+
+                    }
+
+                });
+
+            });
+
+
+            // --- TESTIMONIAL SLIDER ---
+
+            let currentSlide = 0;
+
+            function generateTestimonials() {
+
+                if(!testimonialSlider) return;
+
+                testimonialSlider.innerHTML = '';
+
+                testimonials.forEach(testimonial => {
+
+                    const testimonialEl = document.createElement('div');
+
+                    testimonialEl.className = 'testimonial';
+
+                    testimonialEl.innerHTML = `
+
+                        <div class="testimonial-img"><img src="${testimonial.image}" alt="${testimonial.name}" loading="lazy"></div>
+
+                        <p class="testimonial-text">"${testimonial.text}"</p>
+
+                        <h4 class="testimonial-name">${testimonial.name}</h4>
+
+                        <p class="testimonial-position">${testimonial.position}</p>`;
+
+                    testimonialSlider.appendChild(testimonialEl);
+
+                });
+
+            }
+
+
+            function showSlide(index) {
+
+                if(testimonialSlider) {
+
+                    testimonialSlider.style.transform = `translateX(-${index * 100}%)`;
+
+                    currentSlide = index;
+
+                }
+
+            }
+
+            if(prevBtn && nextBtn) {
+
+                prevBtn.addEventListener('click', () => {
+
+                    const newIndex = (currentSlide > 0) ? currentSlide - 1 : testimonials.length - 1;
+
+                    showSlide(newIndex);
+
+                });
+
+
+                nextBtn.addEventListener('click', () => {
+
+                    const newIndex = (currentSlide < testimonials.length - 1) ? currentSlide + 1 : 0;
+
+                    showSlide(newIndex);
+
+                });
+
+                
+
+                // Auto-slide
+
+                setInterval(() => {
+
+                    nextBtn.click();
+
+                }, 5000);
+
+            }
+
+            
+
+            // --- SMOOTH SCROLL FOR OTHER ANCHOR LINKS ---
+
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+
+                anchor.addEventListener('click', function (e) {
+
+                    // Prevent this for filter links, as they are handled separately
+
+                    if (this.classList.contains('nav-filter')) return;
+
+
+                    const targetEl = document.querySelector(this.getAttribute('href'));
+
+                    if (targetEl) {
+
+                        e.preventDefault();
+
+                        targetEl.scrollIntoView({ behavior: 'smooth' });
+
+                    }
+
+                });
+
+            });
+
+            
+
+            // --- INITIAL PAGE LOAD ---
+
+            generateJobCards();
+
+            generateTestimonials();
+
+        });
+
+    </script>
+
+</body>
+
+</html>
